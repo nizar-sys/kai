@@ -21,7 +21,7 @@ tell application "Safari"
             const base64Image = await getBase64FromImage(captchaImage);
 
             // Kirim ke backend
-            const response = await fetch('https://7944-2404-c0-2140-00-470-2f31.ngrok-free.app/solve-captcha', {
+            const response = await fetch('https://0d2e-103-156-15-238.ngrok-free.app/solve-captcha', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ base64Image })

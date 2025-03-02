@@ -33,7 +33,7 @@
 
         try {
             // Kirim ke backend untuk penyelesaian CAPTCHA
-            const response = await fetch("https://7944-2404-c0-2140-00-470-2f31.ngrok-free.app/solve-captcha", {
+            const response = await fetch("https://4cd5-103-156-15-238.ngrok-free.app/solve-captcha", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ base64Image }),
