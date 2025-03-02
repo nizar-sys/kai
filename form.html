@@ -1,0 +1,1516 @@
+<html lang="id">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- CSRF Token -->
+        <meta
+            name="csrf-token"
+            content="P7769Ep45UHUKWh5h5hCdPSONGi7QPVP8C620hsf"
+        />
+
+        <title>PT Kereta Api Indonesia - Passenger Data</title>
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="https://booking.kai.id/img/fav-icon.png"
+        />
+
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+        <style type="text/css">
+            @font-face {
+                font-family: Nunito;
+                font-style: normal;
+                font-weight: 400;
+                src: url(/cf-fonts/s/nunito/5.0.16/latin/400/normal.woff2);
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC,
+                    U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F,
+                    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+                    U+FEFF, U+FFFD;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: Nunito;
+                font-style: normal;
+                font-weight: 400;
+                src: url(/cf-fonts/s/nunito/5.0.16/vietnamese/400/normal.woff2);
+                unicode-range: U+0102-0103, U+0110-0111, U+0128-0129,
+                    U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301,
+                    U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9,
+                    U+20AB;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: Nunito;
+                font-style: normal;
+                font-weight: 400;
+                src: url(/cf-fonts/s/nunito/5.0.16/cyrillic/400/normal.woff2);
+                unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1,
+                    U+2116;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: Nunito;
+                font-style: normal;
+                font-weight: 400;
+                src: url(/cf-fonts/s/nunito/5.0.16/cyrillic-ext/400/normal.woff2);
+                unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF,
+                    U+A640-A69F, U+FE2E-FE2F;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: Nunito;
+                font-style: normal;
+                font-weight: 400;
+                src: url(/cf-fonts/s/nunito/5.0.16/latin-ext/400/normal.woff2);
+                unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F,
+                    U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113,
+                    U+2C60-2C7F, U+A720-A7FF;
+                font-display: swap;
+            }
+        </style>
+
+        <!-- Styles -->
+        <link
+            href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+            rel="stylesheet"
+            integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+            crossorigin="anonymous"
+        />
+        <link href="https://booking.kai.id/css/slick.css" rel="stylesheet" />
+        <link href="https://booking.kai.id/css/print.css" rel="stylesheet" />
+        <link
+            href="https://booking.kai.id/css/jquery.flexdatalist.min.css"
+            rel="stylesheet"
+        />
+
+        <link
+            href="https://booking.kai.id/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            href="https://booking.kai.id/css/bootstrap-datepicker.min.css"
+            rel="stylesheet"
+        />
+        <link href="https://booking.kai.id/css/custom.css" rel="stylesheet" />
+
+        <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+        />
+
+        <script
+            type="text/javascript"
+            async=""
+            charset="utf-8"
+            src="https://www.gstatic.com/recaptcha/releases/rW64dpMGAGrjU7JJQr9xxPl8/recaptcha__en.js"
+            crossorigin="anonymous"
+            integrity="sha384-stI8i0l4UnrupDOI6In0RQyfmG7x4RHoRSlzjf/yDu+T9clp2es/I4WNYpU4isM0"
+        ></script>
+        <script src="https://keretaapiindonesia.api.useinsider.com/ins.js?id=10008925"></script>
+
+        <style type="text/css">
+            span.im-caret {
+                -webkit-animation: 1s blink step-end infinite;
+                animation: 1s blink step-end infinite;
+            }
+
+            @keyframes blink {
+                from,
+                to {
+                    border-right-color: black;
+                }
+                50% {
+                    border-right-color: transparent;
+                }
+            }
+
+            @-webkit-keyframes blink {
+                from,
+                to {
+                    border-right-color: black;
+                }
+                50% {
+                    border-right-color: transparent;
+                }
+            }
+
+            span.im-static {
+                color: grey;
+            }
+
+            div.im-colormask {
+                display: inline-block;
+                border-style: inset;
+                border-width: 2px;
+                -webkit-appearance: textfield;
+                -moz-appearance: textfield;
+                appearance: textfield;
+            }
+
+            div.im-colormask > input {
+                position: absolute;
+                display: inline-block;
+                background-color: transparent;
+                color: transparent;
+                -webkit-appearance: caret;
+                -moz-appearance: caret;
+                appearance: caret;
+                border-style: none;
+                left: 0; /*calculated*/
+            }
+
+            div.im-colormask > input:focus {
+                outline: none;
+            }
+
+            div.im-colormask > input::-moz-selection {
+                background: none;
+            }
+
+            div.im-colormask > input::selection {
+                background: none;
+            }
+            div.im-colormask > input::-moz-selection {
+                background: none;
+            }
+
+            div.im-colormask > div {
+                color: black;
+                display: inline-block;
+                width: 100px; /*calculated*/
+            }
+        </style>
+    </head>
+    <body class="modal-open">
+        <div id="app">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="https://booking.kai.id">
+                            <img
+                                type="image/x-icon"
+                                src="https://booking.kai.id/img/logo-kai-new.png"
+                                alt="logo kai"
+                                height="30"
+                                width="80"
+                            />
+                        </a>
+                        <button
+                            type="button"
+                            class="navbar-toggle"
+                            data-toggle="collapse"
+                            data-target="#myNavbar"
+                        >
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="https://booking.kai.id"
+                                    >Beranda</a
+                                >
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <!-- Authentication Links -->
+                            <li class="dropdown">
+                                <a
+                                    id="navbarDropdown"
+                                    class="dropdown-toggle"
+                                    href="#"
+                                    role="button"
+                                    data-toggle="dropdown"
+                                >
+                                    MUHAMAD NIZAR <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="https://booking.kai.id/profile"
+                                            >Profil</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="https://booking.kai.id/passenger-list"
+                                            >Daftar Penumpang</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a
+                                            class="dropdown-item"
+                                            href="https://booking.kai.id/auth/logout"
+                                            onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();"
+                                        >
+                                            Keluar
+                                        </a>
+                                    </li>
+
+                                    <form
+                                        id="logout-form"
+                                        action="https://booking.kai.id/auth/logout"
+                                        method="POST"
+                                        style="display: none"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="_token"
+                                            value="P7769Ep45UHUKWh5h5hCdPSONGi7QPVP8C620hsf"
+                                        />
+                                    </form>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div id="content-wrapper">
+                <div class="container">
+                    <link
+                        rel="stylesheet"
+                        type="text/css"
+                        href="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/css/iziToast.min.css"
+                    />
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.1.5/js/iziToast.min.js"></script>
+                    <script>
+                        iziToast.({title: "",message: "",});
+                    </script>
+
+                    <style>
+                        .modal-confirm .modal-content {
+                            padding: 20px;
+                            font-size: 16px;
+                            border-radius: 5px;
+                            border: none;
+                        }
+                        .modal-confirm .modal-header {
+                            background: #e85e6c;
+                            border-bottom: none;
+                            position: relative;
+                            text-align: center;
+                            margin: -20px -20px 0;
+                            border-radius: 5px 5px 0 0;
+                            padding: 35px;
+                        }
+                        .modal-confirm h4 {
+                            text-align: center;
+                            font-size: 36px;
+                            margin: 10px 0;
+                        }
+                        .modal-confirm .form-control,
+                        .modal-confirm .btn {
+                            min-height: 40px;
+                            border-radius: 3px;
+                        }
+                        .modal-confirm .close {
+                            position: absolute;
+                            top: 15px;
+                            right: 15px;
+                            color: #fff;
+                            text-shadow: none;
+                            opacity: 0.5;
+                        }
+                        .modal-confirm .close:hover {
+                            opacity: 0.8;
+                        }
+                        .modal-confirm .icon-box {
+                            color: #fff;
+                            width: 50px;
+                            height: 505px;
+                            display: inline-block;
+                            border-radius: 50%;
+                            z-index: 9;
+                            border: 5px solid #fff;
+                            padding: 15px;
+                            text-align: center;
+                        }
+                        .modal-confirm .icon-box i {
+                            font-size: 20px;
+                            margin: -2px 0 0 -2px;
+                        }
+                        .modal-confirm.modal-dialog {
+                            margin-top: 80px;
+                        }
+                        .modal-confirm .btn {
+                            color: #fff;
+                            border-radius: 4px;
+                            background: #eeb711;
+                            text-decoration: none;
+                            transition: all 0.4s;
+                            line-height: normal;
+                            border-radius: 30px;
+                            margin-top: 10px;
+                            padding: 6px 20px;
+                            min-width: 150px;
+                            border: none;
+                        }
+                        .modal-confirm .btn:hover,
+                        .modal-confirm .btn:focus {
+                            background: #eda645;
+                            outline: none;
+                        }
+                        .trigger-btn {
+                            display: inline-block;
+                            margin: 100px auto;
+                        }
+                        .glyphicon.glyphicon-exclamation-sign {
+                            font-size: 50px;
+                        }
+                    </style>
+                    <br />
+                    <div class="title-page"><h1>Pemesanan</h1></div>
+                    <div class="column-content-wrapper">
+                        <form
+                            method="POST"
+                            action="https://booking.kai.id/passengercontrol"
+                            accept-charset="UTF-8"
+                            id="pesanan"
+                            role="form"
+                            data-toggle="validator"
+                            novalidate="true"
+                        >
+                            <input
+                                name="_token"
+                                type="hidden"
+                                value="P7769Ep45UHUKWh5h5hCdPSONGi7QPVP8C620hsf"
+                            />
+                            <div class="row">
+                                <div
+                                    class="column-content-left col-md-8 col-sm-12"
+                                >
+                                    <div class="column-box-wrapper">
+                                        <div class="column-box">
+                                            <div class="title-box">
+                                                Data Pemesan
+                                            </div>
+                                            <div class="column-form-box">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_title"
+                                                                >Title</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-user fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <select
+                                                                    class="form-control"
+                                                                    id="pemesan_title"
+                                                                    name="pemesan_title"
+                                                                >
+                                                                    <option
+                                                                        value="MR"
+                                                                        selected="selected"
+                                                                    >
+                                                                        Tuan
+                                                                    </option>
+                                                                    <option
+                                                                        value="MRS."
+                                                                    >
+                                                                        Nyonya
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <p
+                                                            style="color: black"
+                                                        ></p>
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_tandapengenal"
+                                                                >Tipe
+                                                                Identitas</label
+                                                            >
+
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-id-card fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <select
+                                                                    name="pemesan_tandapengenal"
+                                                                    class="form-control"
+                                                                    id="pemesan_tandapengenal"
+                                                                    required=""
+                                                                    value="ktp"
+                                                                >
+                                                                    <option
+                                                                        value="ktp"
+                                                                        selected=""
+                                                                    >
+                                                                        NIK
+                                                                    </option>
+                                                                    <option
+                                                                        value="paspor"
+                                                                    >
+                                                                        Passpor
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_nohp"
+                                                                >No. HP
+                                                                Pemesan</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-phone fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control"
+                                                                    placeholder="08xxxxxx"
+                                                                    id="pemesan_nohp"
+                                                                    data-minlength="8"
+                                                                    maxlength="16"
+                                                                    name="pemesan_nohp"
+                                                                    type="text"
+                                                                    value="08111804433"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_alamat"
+                                                                >Alamat</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-map-marker fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control"
+                                                                    placeholder="Nama Daerah"
+                                                                    id="pemesan_alamat"
+                                                                    required="required"
+                                                                    data-minlength="5"
+                                                                    name="pemesan_alamat"
+                                                                    type="text"
+                                                                    value="jl raya bgor"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_nama"
+                                                                >Nama
+                                                                Pemesan</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-user fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control letter"
+                                                                    placeholder="Nama sesuai NIK/Paspor"
+                                                                    id="pemesan_nama"
+                                                                    required="required"
+                                                                    name="pemesan_nama"
+                                                                    type="text"
+                                                                    value="MUHAMAD NIZAR"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_notandapengenal"
+                                                                >Nomor
+                                                                Identitas</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-id-card fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+
+                                                                <input
+                                                                    class="form-control genInfo"
+                                                                    placeholder="Nomor Identitas"
+                                                                    data-minlength="1"
+                                                                    maxlength="16"
+                                                                    id="pemesan_notandapengenal"
+                                                                    required="required"
+                                                                    name="pemesan_notandapengenal"
+                                                                    type="text"
+                                                                    value="3271010711950010"
+                                                                />
+                                                            </div>
+                                                            <span
+                                                                class="tooltiptext"
+                                                            >
+                                                                Untuk penumpang
+                                                                usia mulai 3 s.d
+                                                                17 tahun tipe
+                                                                identitas
+                                                                'Lainnya', kolom
+                                                                nomor identitas
+                                                                di isi nomor
+                                                                kartu identitas
+                                                                anak/kartu
+                                                                pelajar atau
+                                                                kartu anak
+                                                                lainnya
+                                                                sedangkan untuk
+                                                                yang belum
+                                                                memiliki bukti
+                                                                identitas dapat
+                                                                di isi nomor
+                                                                identitas
+                                                                orangtua_tanggal
+                                                                bulan tahun
+                                                                lahir anak
+                                                                (ddmmyyyy)
+                                                                sebagai
+                                                                identitas
+                                                                anak,contoh:332909xxxxxxxxxx_13072013
+                                                            </span>
+
+                                                            <div
+                                                                class="help-block with-errors text-danger"
+                                                            ></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="pemesan_email"
+                                                                >Email</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-envelope fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control"
+                                                                    placeholder="me@contoh.co.id"
+                                                                    id="pemesan_email"
+                                                                    required="required"
+                                                                    name="pemesan_email"
+                                                                    type="email"
+                                                                    value="nizarid04+1@gmail.com"
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                        <!-- <div class="form-group">
+                                                <label for="pemesan_kota">Kota</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+                                                    <input type="text" name="origination" value="PASARSENEN" id="passenger-city" class="form-control letter" placeholder="Kota/Provinsi"
+                                                        data-data="https://booking.kai.id/api/city-name"
+                                                        data-search-in='["name"]'
+                                                        data-min-length="1"
+                                                        data-value-property="name"
+                                                        data-text-property="name"
+                                                        data-visible-properties='["name"]'
+                                                        data-selection-require="true">
+                                                </div>
+                                            </div> -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div
+                                        style="
+                                            margin-top: -7%;
+                                            margin-bottom: 2%;
+                                        "
+                                        class="pull-right"
+                                    >
+                                        <input
+                                            id="cbCopy"
+                                            class="form-check-input"
+                                            style="margin-left: -15px"
+                                            checked="checked"
+                                            name="copy"
+                                            type="checkbox"
+                                            value="1"
+                                        />
+                                        <label
+                                            for="pemesan_email"
+                                            class="form-check-label"
+                                            style="color: orange"
+                                            >Tambahkan ke daftar
+                                            penumpang</label
+                                        >
+                                    </div>
+
+                                    <div class="column-box-wrapper">
+                                        <div class="column-box">
+                                            <div class="title-box">
+                                                Data Penumpang 1
+                                            </div>
+                                            <div class="column-form-box">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label for=""
+                                                                >Title</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-user fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <select
+                                                                    class="form-control"
+                                                                    id="penumpang_title1"
+                                                                    required=""
+                                                                    name="penumpang_title[]"
+                                                                >
+                                                                    <option
+                                                                        value="MR"
+                                                                        selected="selected"
+                                                                    >
+                                                                        Tuan
+                                                                    </option>
+                                                                    <option
+                                                                        value="MRS."
+                                                                    >
+                                                                        Nyonya
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for=""
+                                                                >Tipe
+                                                                Identitas</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-id-card fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <select
+                                                                    name="penumpang_tandapengenal[]"
+                                                                    class="form-control"
+                                                                    id="penumpang_tandapengenal1"
+                                                                    required=""
+                                                                    value="ktp"
+                                                                >
+                                                                    <option
+                                                                        value="ktp"
+                                                                        selected=""
+                                                                    >
+                                                                        NIK
+                                                                    </option>
+                                                                    <option
+                                                                        value="paspor"
+                                                                    >
+                                                                        Paspor
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="form-group hidden"
+                                                        >
+                                                            <label
+                                                                for="penumpang_nohp[]"
+                                                                >No. HP
+                                                                Penumpang</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-phone fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control number"
+                                                                    placeholder="08xxxxxx"
+                                                                    id="penumpang_nohp1"
+                                                                    required=""
+                                                                    name="penumpang_nohp[]"
+                                                                    type="hidden"
+                                                                    value="08111804433"
+                                                                />
+                                                                <input
+                                                                    name="penumpang_type[]"
+                                                                    type="hidden"
+                                                                    value="A"
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                class="help-block with-errors"
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="penumpang_nama[]"
+                                                                >Nama</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-user fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control letter"
+                                                                    placeholder="Nama sesuai NIK / Paspor"
+                                                                    id="penumpang_nama1"
+                                                                    required=""
+                                                                    name="penumpang_nama[]"
+                                                                    type="text"
+                                                                    value="MUHAMAD NIZAR"
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                class="help-block with-errors"
+                                                            ></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label
+                                                                for="penumpang_notandapengenal[]"
+                                                                >Nomor
+                                                                Identitas</label
+                                                            >
+                                                            <div
+                                                                class="input-group"
+                                                            >
+                                                                <span
+                                                                    class="input-group-addon"
+                                                                    ><i
+                                                                        class="fa fa-id-card fa"
+                                                                        aria-hidden="true"
+                                                                    ></i
+                                                                ></span>
+                                                                <input
+                                                                    class="form-control uniqueval genInfo"
+                                                                    placeholder="Nomor Identitas sesuai NIK / Paspor"
+                                                                    maxlength="16"
+                                                                    id="penumpang_notandapengenal1"
+                                                                    data-error="Nomor Identitas Wajib Diisi"
+                                                                    required=""
+                                                                    name="penumpang_notandapengenal[]"
+                                                                    type="text"
+                                                                    value="3271010711950010"
+                                                                />
+                                                            </div>
+                                                            <span
+                                                                class="tooltiptext"
+                                                            >
+                                                                Untuk penumpang
+                                                                usia mulai 3 s.d
+                                                                17 tahun tipe
+                                                                identitas
+                                                                'Lainnya', kolom
+                                                                nomor identitas
+                                                                di isi nomor
+                                                                kartu identitas
+                                                                anak/kartu
+                                                                pelajar atau
+                                                                kartu anak
+                                                                lainnya
+                                                                sedangkan untuk
+                                                                yang belum
+                                                                memiliki bukti
+                                                                identitas dapat
+                                                                di isi nomor
+                                                                identitas
+                                                                orangtua_tanggal
+                                                                bulan tahun
+                                                                lahir anak
+                                                                (ddmmyyyy)
+                                                                sebagai
+                                                                identitas
+                                                                anak,contoh:332909xxxxxxxxxx_13072013
+                                                            </span>
+
+                                                            <div
+                                                                class="help-block with-errors text-danger"
+                                                            ></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="column-content-right col-md-4 col-sm-12"
+                                >
+                                    <div class="side-column-final-wrapper">
+                                        <div class="side-column-final">
+                                            <div class="top-column">
+                                                Total Rp 74.000,-
+                                            </div>
+                                            <div class="body-column">
+                                                <div class="date depature_date">
+                                                    Jumat, 28 Maret 2025
+                                                </div>
+                                                <div class="train">
+                                                    Bengawan (282)
+                                                </div>
+                                                <div class="class">
+                                                    Ekonomi - C
+                                                </div>
+                                                <div class="passenger">
+                                                    1 Dewasa
+                                                </div>
+
+                                                <div
+                                                    class="destionation-wrapper"
+                                                >
+                                                    <div class="row">
+                                                        <div
+                                                            class="col-md-5 col-sm-4 col-xs-4"
+                                                        >
+                                                            <div class="city">
+                                                                PASARSENEN
+                                                            </div>
+                                                            <div
+                                                                class="time text-muted"
+                                                            >
+                                                                08:55
+                                                            </div>
+                                                            <div
+                                                                class="time text-muted"
+                                                            >
+                                                                28 Mar 2025
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-2 col-sm-4 col-xs-4"
+                                                        >
+                                                            <div class="arrow">
+                                                                <i
+                                                                    class="fas fa-angle-double-right"
+                                                                ></i>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="col-md-5 col-sm-4 col-xs-4"
+                                                        >
+                                                            <div class="city">
+                                                                LEMPUYANGAN
+                                                            </div>
+                                                            <div
+                                                                class="time text-muted"
+                                                            >
+                                                                17:10
+                                                            </div>
+                                                            <div
+                                                                class="time text-muted"
+                                                            >
+                                                                28 Mar 2025
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div
+                                    class="column-content-left col-md-8 col-sm-12"
+                                >
+                                    <div>
+                                        <label class="text-danger"
+                                            >Ketentuan Reservasi Tiket Kereta
+                                            Api</label
+                                        >
+                                    </div>
+                                    <div class="notice-wrapper">
+                                        <div class="column">
+                                            <ol>
+                                                <li>
+                                                    Reservasi dapat dilakukan 3
+                                                    jam sebelum kereta
+                                                    berangkat.
+                                                </li>
+                                                <li>
+                                                    Harga dan ketersediaan
+                                                    tempat duduk sewaktu-waktu
+                                                    dapat berubah.
+                                                </li>
+                                                <li>
+                                                    Pastikan anda telah menerima
+                                                    email konfirmasi pembayaran
+                                                    dari PT. Kereta Api
+                                                    Indonesia (Persero) untuk
+                                                    ditukarkan dengan boarding
+                                                    pass di stasiun online.
+                                                </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox-wrapper">
+                                        <label for=""
+                                            ><input
+                                                type="checkbox"
+                                                name="agree"
+                                                id="setuju"
+                                                required=""
+                                            />
+                                            Dengan ini saya setuju dan mematuhi
+                                            <a
+                                                href="https://www.kai.id/corporate/passenger_services/1"
+                                                target="blank"
+                                            >
+                                                persyaratan dan ketentuan
+                                            </a></label
+                                        >
+                                    </div>
+                                    <div class="btn-two-cols-wrapper">
+                                        <!-- <div>
+                        <div required="required" data-callback="enableSubmitPassengerData" data-sitekey="6LeCD6woAAAAAHz-bCQAI0Bg2b1SGsb9ZxXRMUA7" class="g-recaptcha"></div>
+                    </div>
+                    <div class="help-block with-errors text-danger"></div> -->
+                                        <img
+                                            src="https://booking.kai.id/captcha/image?_=1740891870487"
+                                            alt="https://github.com/igoshev/laravel-captcha"
+                                            style="
+                                                cursor: pointer;
+                                                width: 180px;
+                                                height: 50px;
+                                            "
+                                            title="Perbarui"
+                                            onclick="this.setAttribute('src','https://booking.kai.id/captcha/image?_=308886137&amp;_='+Math.random());var captcha=document.getElementById('captcha');if(captcha){captcha.focus()}"
+                                        />
+                                        <br />
+                                        <span class="error"
+                                            >Invalid Captcha</span
+                                        >
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <input
+                                                    class="form-control"
+                                                    type="text"
+                                                    id="captcha"
+                                                    name="captcha"
+                                                    autocomplete="off"
+                                                    style="margin-top: 10px"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="btn-two-cols-wrapper">
+                                        <div class="clearfix"></div>
+                                        <div class="pull-right">
+                                            <button
+                                                class="btn btn-primary"
+                                                enabled="enabled"
+                                                id="bayar"
+                                                name="submitbutton"
+                                                value="Pesan"
+                                                type="button"
+                                            >
+                                                Pesan
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div
+                        class="modal fade top"
+                        id="confirmLogin"
+                        tabindex="-1"
+                        role="dialog"
+                        arialabelledby="confirmLoginModal"
+                    >
+                        <div class="modal-dialog modal-frame" role="document">
+                            <div class="modal-content">
+                                <form
+                                    method="POST"
+                                    action="https://booking.kai.id/auth/login"
+                                    accept-charset="UTF-8"
+                                    id="login"
+                                >
+                                    <input
+                                        name="_token"
+                                        type="hidden"
+                                        value="P7769Ep45UHUKWh5h5hCdPSONGi7QPVP8C620hsf"
+                                    />
+                                    <div class="modal-header">
+                                        <h4
+                                            class="modal-title"
+                                            id="exampleModalLabel"
+                                        >
+                                            Login
+                                        </h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div
+                                            class="input-group"
+                                            style="margin-bottom: 25px"
+                                        >
+                                            <span class="input-group-addon"
+                                                ><i
+                                                    class="glyphicon glyphicon-user"
+                                                ></i
+                                            ></span>
+                                            <input
+                                                class="form-control"
+                                                id="username"
+                                                placeholder="Email atau Nomor HP"
+                                                required=""
+                                                name="username"
+                                                type="text"
+                                            />
+                                        </div>
+                                        <div
+                                            class="input-group"
+                                            style="margin-bottom: 25px"
+                                        >
+                                            <span class="input-group-addon"
+                                                ><i
+                                                    class="glyphicon glyphicon-lock"
+                                                ></i
+                                            ></span>
+                                            <input
+                                                class="form-control pass"
+                                                placeholder="Password"
+                                                required=""
+                                                name="password"
+                                                type="password"
+                                                value=""
+                                            />
+                                            <i
+                                                class="glyphicon glyphicon-eye-open form-control-feedback"
+                                                style="color: black"
+                                            ></i>
+                                            <input
+                                                name="search"
+                                                type="hidden"
+                                                value="ticket"
+                                            />
+                                        </div>
+
+                                        <a
+                                            href="https://booking.kai.id/register"
+                                            >Registrasi</a
+                                        >
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-dismiss="modal"
+                                        >
+                                            Pesan Tanpa Daftar
+                                        </button>
+                                        <input
+                                            class="btn sample btn-sample btn-search-booking pull-right"
+                                            id="btn-login"
+                                            type="submit"
+                                            value="Login"
+                                        />
+                                    </div>
+                                    <input
+                                        name="myreferer"
+                                        type="hidden"
+                                        value="passengerdata"
+                                    />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="modalDuplicateError" class="modal fade">
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span
+                                        class="glyphicon glyphicon-exclamation-sign"
+                                    ></span>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <h4>Ooops!</h4>
+                                    <p>
+                                        Nomor Identitas / Nomor HP calon
+                                        penumpang tidak boleh sama.
+                                    </p>
+                                    <button
+                                        class="btn sample btn-sample btn-search-booking"
+                                        data-dismiss="modal"
+                                    >
+                                        Coba Lagi
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        id="submitConfirm"
+                        class="modal fade in"
+                        style="display: block"
+                    >
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span
+                                        class="glyphicon glyphicon-exclamation-sign"
+                                    ></span>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>
+                                        Apakah data sudah diisi dengan benar ?
+                                    </p>
+                                    <button
+                                        class="btn sample btn-danger btn-search-booking"
+                                        data-dismiss="modal"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        class="btn sample btn-sample btn-search-booking"
+                                        id="mSubmit"
+                                    >
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Passenger Adult List -->
+                    <div
+                        class="modal fade top"
+                        id="popup-adult"
+                        tabindex="-1"
+                        role="dialog"
+                        arialabelledby="popup-adult"
+                    >
+                        <div class="modal-dialog modal-frame modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Passenger List</h4>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-justify">
+                                        Silakan pilih data penumpang pada list
+                                        di bawah ini:
+                                    </p>
+                                    <div class="list-group"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div
+                                        class="btn btn-danger"
+                                        data-dismiss="modal"
+                                    >
+                                        Close
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal Passenger Infant List -->
+                    <div
+                        class="modal fade top"
+                        id="popup-infant"
+                        tabindex="-1"
+                        role="dialog"
+                        arialabelledby="popup-infant"
+                    >
+                        <div class="modal-dialog modal-frame modal-md">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Passenger List</h4>
+                                    <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-label="Close"
+                                    >
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p class="text-justify">
+                                        Silakan pilih data penumpang pada list
+                                        di bawah ini:
+                                    </p>
+                                    <div class="list-group"></div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div
+                                        class="btn btn-danger"
+                                        data-dismiss="modal"
+                                    >
+                                        Close
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="cancelBook" class="modal fade">
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <span
+                                        class="glyphicon glyphicon-exclamation-sign"
+                                    ></span>
+                                </div>
+                                <div class="modal-body text-center">
+                                    <p>
+                                        Apakah anda yakin ingin membatalkan
+                                        pemesanan?
+                                    </p>
+
+                                    <button
+                                        class="btn sample btn-danger btn-search-booking"
+                                        data-dismiss="modal"
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        class="btn sample btn-primary btn-search-booking"
+                                        id="cancelSubmit"
+                                    >
+                                        Ok
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of container -->
+            </div>
+            <!-- end of content-wrapper -->
+        </div>
+        <!-- Scripts -->
+        <script>
+            BASE_URL = "https://booking.kai.id" + "/";
+        </script>
+        <script src="https://booking.kai.id/js/apps.js"></script>
+        <script src="https://booking.kai.id/js/jquery-3.3.1.min.js"></script>
+        <script src="https://booking.kai.id/js/bootstrap.min.js"></script>
+        <script src="https://booking.kai.id/js/bootstrap-datepicker.min.js"></script>
+        <script src="https://booking.kai.id/js/jquery.flexdatalist.min.js"></script>
+        <script src="https://booking.kai.id/js/bootstrap-validate.js"></script>
+        <script src="https://booking.kai.id/js/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.9/validator.min.js"></script>
+        <script src="https://booking.kai.id/js/slick.min.js"></script>
+        <script src="https://booking.kai.id/js/inputValidate.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+        <!-- Inputmask -->
+        <script src="https://booking.kai.id/js/inputmask/inputmask.js"></script>
+        <script src="https://booking.kai.id/js/inputmask/jquery.inputmask.bundle.js"></script>
+        <script src="https://booking.kai.id/js/inputmask/inputmask.numeric.extensions.js"></script>
+        <script
+            src="https://www.google.com/recaptcha/api.js?"
+            async=""
+            defer=""
+        ></script>
+
+        <script type="text/javascript">
+            var data = {
+                address: "jl raya bgor",
+                birthdate: "2025-03-01",
+                email: "nizarid04+1@gmail.com",
+                fullname: "MUHAMAD NIZAR",
+                msisdn: "08111804433",
+                idnumber: "3271010711950010",
+                idtype: "1",
+                title: "0   ",
+                gender: "1",
+                memberid: 150159592,
+                premium: "1",
+                pinflag: false,
+                emptype: "U",
+                empstat: "UMUM",
+                memberNik: "3271010711950010",
+                loginId: 29488329,
+            };
+
+            if (data != undefined) {
+                window.insider_object = window.insider_object || {};
+
+                var gender = data.gender == "1" ? "M" : "F";
+
+                var param = {
+                    uuid: data.memberid.toString(),
+                    gender: data.gender,
+                    birthday: data.birthdate,
+                    gdpr_optin: true,
+                    name: data.fullname,
+                    email: data.email,
+                    phone_number: data.msisdn.replace(/^.{1}/g, "+62"),
+                    email_optin: true,
+                    sms_optin: true,
+                    whatsapp_optin: true,
+                };
+                window.insider_object.user = param;
+
+                userLogging(param);
+            }
+
+            $("#bayar").attr("disabled", true);
+
+            localStorage.setItem("captcha", "1");
+            // copy data passenger
+            APP.copyData();
+            // initiat datepicker
+            APP.initDate();
+            // enable submit button when check agreement
+            APP.enableSubmitPassengerData();
+            // validate user data
+            APP.validatePassengerData("2025-03-28");
+            // init select2
+            APP.initSelect2();
+            // set max length id number
+            APP.setMaxLength();
+            // hide show pasword?\
+            APP.showPassword();
+
+            // set depature date
+            var initdate = "2025-03-28";
+            depatureDate = APP.formatDate(initdate, true, " ");
+            // set depature date
+            $(".depature_date").append(depatureDate);
+
+            var pass_data = [];
+            APP.applyPassData(pass_data);
+
+            // check if user has login
+            var date = "2025-03-01";
+            var brithdate = new Date(date);
+            var dd = brithdate.getDate();
+            var mm = brithdate.getMonth();
+            var yyyy = brithdate.getFullYear();
+            $("#pemesan_tanggallahir").datepicker(
+                "setDate",
+                new Date(yyyy, mm, dd)
+            );
+
+            function enableSubmitPassengerData() {
+                if ($("input[name=agree]:checked").length > 0) {
+                    $("#bayar").attr("disabled", false);
+                }
+                localStorage.setItem("captcha", "1");
+            }
+
+            //data list for city
+            $("#passenger-city").flexdatalist({
+                minLength: 2,
+                valueProperty: "code",
+                selectionRequired: true,
+                visibleProperties: ["name"],
+                searchIn: ["name"],
+                data: "https://booking.kai.id/api/city-name",
+            });
+
+            $("#mBackToGetSchedule").click(function () {
+                $("#modalErrorBooking").modal("hide");
+                window.location.href =
+                    "https://booking.kai.id?origination=BD&amp;destination=GMR&amp;tanggal=2025-02-20&amp;adult=1&amp;infant=0&amp;book_type=";
+            });
+        </script>
+        <script>
+            APP.callModalCancel();
+        </script>
+
+        <script
+            defer=""
+            src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+            integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+            data-cf-beacon='{"rayId":"919e5a3db9171658","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"7d06e00a46a9413b8f6a2807caeb918f"}'
+            crossorigin="anonymous"
+        ></script>
+
+        <div class="modal-backdrop fade in"></div>
+    </body>
+</html>
