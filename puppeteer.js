@@ -11,7 +11,9 @@ function runScript(command) {
 
 // Pilih perintah berdasarkan OS
 const isMac = process.platform === 'darwin';
-const command = isMac ? 'osascript execute_script.scpt' : 'pwsh -ExecutionPolicy Bypass -File execute_script.ps1';
+const command = isMac 
+    ? 'osascript execute_script.scpt' 
+    : 'C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -File execute_script.ps1';
 
 // Jalankan pertama kali
 runScript(command);
