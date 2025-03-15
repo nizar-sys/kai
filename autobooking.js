@@ -1,87 +1,152 @@
+let bookingInterval;
+let isBookingActive = false;
+
+async function checkExpiration() {
+  try {
+    const response = await fetch("https://nizar.vercel.app/exp.json");
+    const data = await response.json();
+    const today = new Date();
+
+    if (today > new Date(data.expired)) {
+      alert("⛔ Skrip ini telah kedaluwarsa.");
+      return false;
+    }
+    return true;
+  } catch (error) {
+    console.error("⚠️ Gagal mengambil status expired:", error);
+    return false;
+  }
+}
+
 function generateRandomPhoneSuffix() {
-  // Menghasilkan tiga digit angka acak
   return Math.floor(100 + Math.random() * 900);
 }
 
 function updatePhoneNumber() {
-  const phoneInput = $("#inputCallerPhone"); // Cari elemen input nomor telepon berdasarkan ID
-
+  const phoneInput = $("#inputCallerPhone");
   if (phoneInput.length) {
-    const currentValue = phoneInput.val(); // Ambil nilai nomor telepon saat ini
-    const newValue = currentValue.slice(0, -3) + generateRandomPhoneSuffix(); // Ganti tiga digit terakhir dengan angka acak
-    phoneInput.val(newValue); // Update input dengan nomor telepon yang baru
-    console.log(`✅ Nomor telepon berhasil diperbarui menjadi: ${newValue}`);
-    return true; // Menandakan bahwa nomor telepon telah berhasil diperbarui
-  } else {
-    console.log("⛔ Input nomor telepon tidak ditemukan.");
-    return false; // Tidak ditemukan input nomor telepon
+    const currentValue = phoneInput.val();
+    const newValue = currentValue.slice(0, -3) + generateRandomPhoneSuffix();
+    phoneInput.val(newValue);
+    console.log(`✅ Nomor telepon diperbarui: ${newValue}`);
+    return true;
   }
+  console.log("⛔ Input nomor telepon tidak ditemukan.");
+  return false;
 }
 
 function checkAlert() {
-  const alert = $(".__alert__"); // Menggunakan jQuery untuk memilih elemen .__alert__
-
-  // Pastikan elemen alert ada sebelum melanjutkan
+  const alert = $(".__alert__");
   if (alert.length) {
-    const modalBody = alert.find(".modal-body"); // Mencari .modal-body di dalam .__alert__
-
+    const modalBody = alert.find(".modal-body");
     if (modalBody.length) {
-      const alertText = modalBody.text().trim(); // Mengambil inner text dan menghapus spasi ekstra
-
-      // Memeriksa apakah pesan tertentu ada dalam modal
-      if (
-        alertText.includes(
-          "Tidak dapat melakukan booking pada jadwal ini, karena anda terdeteksi melakukan booking dengan tidak normal."
-        )
-      ) {
+      const alertText = modalBody.text().trim();
+      if (alertText.includes("Unable to make a booking on this schedule, because you are detected making an abnormal booking.")) {
         console.log("⛔ Booking tidak dapat dilakukan.");
-        return true; // Menandakan bahwa alert tidak normal terdeteksi
+        return true;
       }
-    } else {
-      console.log("⛔ Elemen modal-body tidak ditemukan di dalam alert.");
     }
-  } else {
-    console.log("⛔ Elemen alert tidak ditemukan.");
   }
+  return false;
+}
 
-  return false; // Tidak ada masalah, alert normal
+function checkMaximum() {
+  const alert = $(".__alert__");
+  if (alert.length) {
+    const modalBody = alert.find(".modal-body");
+    if (modalBody.length) {
+      const alertText = modalBody.text().trim();
+      if (alertText.includes("Maximum booking per minute reached, you need to wait!")) {
+        console.log("⛔ Maximum booking limit reached. Waiting...");
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 function checkAndBook() {
-  // Mengecek apakah elemen dengan kelas __close__ ada
+  if (!isBookingActive) return;
+  console.log("🔍 Checking booking elements...");
+  
   const closeButton = document.querySelector(".__close__"),
-    yesButton = document.querySelector(".__yes__");
+        yesButton = document.querySelector(".__yes__");
 
   if (closeButton) {
-    closeButton.click(); // Klik tombol close jika ditemukan
-    console.log("✅ Popup berhasil ditutup!");
+    closeButton.click();
+    console.log("✅ Popup closed!");
   }
+
+  const overlay = document.getElementById("__overlay__");
+  if (overlay) overlay.style.display = "block";
 
   if (yesButton) {
+    const delay = 1000 + Math.random() * 2000;
+    console.log(`⏳ Waiting ${Math.round(delay)} ms before booking...`);
     setTimeout(() => {
-      yesButton.click(); // Klik tombol yes jika ditemukan
-      console.log("✅ Booking berhasil!");
-    }, 1000);
+      if (isBookingActive) {
+        yesButton.click();
+        console.log("✅ Booking successful!");
+      }
+    }, delay);
+  } else {
+    const delay = 1000 + Math.random() * 2000;
+    console.log(`⏳ Waiting ${Math.round(delay)} ms before booking...`);
+    setTimeout(() => {
+      if (isBookingActive) {
+        booking();
+        console.log("✅ Booking successful!");
+      }
+    }, delay);
+    console.log("⚠️ Booking button not found!");
   }
-
-  // Panggil fungsi captchaVerification();
-  captchaVerification();
 }
 
-// Menjalankan fungsi setiap detik (1000ms)
-setInterval(() => {
-  // Cek apakah ada alert yang menunjukkan masalah booking
-  const isAlertNotNormal = checkAlert();
-
-  // Jika ada masalah (alert tidak normal), ganti nomor telepon dulu
-  if (isAlertNotNormal) {
-    const isPhoneUpdated = updatePhoneNumber();
-    if (isPhoneUpdated) {
-      // Jika nomor telepon berhasil diganti, lanjutkan booking dengan klik tombol
-      checkAndBook();
-    }
-  } else {
-    // Jika tidak ada masalah dengan alert, lanjutkan booking langsung
-    checkAndBook();
+async function startBookingProcess() {
+  const isValid = await checkExpiration();
+  if (!isValid) {
+    stopBookingProcess();
+    return;
   }
-}, 1000);
+
+  if (!isBookingActive) {
+    isBookingActive = true;
+    function attemptBooking() {
+      if (!isBookingActive) return;
+      
+      console.log("🔄 Attempting to book...");
+      // captchaVerification();
+      // booking();
+      
+      if (checkAlert() && updatePhoneNumber()) {
+        checkAndBook();
+      } else {
+        checkAndBook();
+      }
+      
+      const nextTry = 1000 + Math.random() * 2000;
+      console.log(`🔁 Next attempt in ${Math.round(nextTry)} ms...`);
+      setTimeout(attemptBooking, nextTry);
+    }
+    attemptBooking();
+    console.log("✅ Booking process started.");
+  }
+}
+
+function stopBookingProcess() {
+  isBookingActive = false;
+  console.log("⛔ Booking process stopped.");
+
+  document.querySelectorAll(".__confirm__").forEach((modal) => {
+    modal.style.display = "none";
+  });
+
+  const overlay = document.getElementById("__overlay__");
+  if (overlay) {
+    overlay.style.display = "none";
+  }
+}
+
+$(document).ready(function () {
+  startBookingProcess();
+});

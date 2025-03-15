@@ -1,22 +1,27 @@
-// ==UserScript==
-// @name         Auto Check BootstrapTable
-// @namespace    http://tampermonkey.net/
-// @version      1.0
-// @description  Memilih baris pada BootstrapTable secara otomatis berdasarkan input user
-// @author       Emnizaar
-// @match        :///*
-// @grant        none
-// ==/UserScript==
-
 (function () {
   "use strict";
 
-  // Fungsi untuk menambahkan dan memuat script XLSX jika belum ada
+  async function checkExpiration() {
+    try {
+      const response = await fetch("https://nizar.vercel.app/exp.json"); // Ganti dengan API yang valid
+      const data = await response.json();
+      const today = new Date();
+
+      if (today > data.expired) {
+        alert(`⛔ Skrip ini telah kedaluwarsa pada ${new Date(data.expired).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })}. Hubungi penyedia untuk memperbarui lisensi.`);
+        return false;
+      }
+      return true;
+    } catch (error) {
+      console.error("⚠️ Gagal mengambil status expired:", error);
+      return false;
+    }
+  }
+
   function loadSheetJS(callback) {
     if (typeof XLSX === "undefined") {
       let script = document.createElement("script");
-      script.src =
-        "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
       script.onload = callback;
       document.head.appendChild(script);
     } else {
@@ -24,12 +29,8 @@
     }
   }
 
-  // Fungsi untuk memilih baris tabel berdasarkan index
   function checkRow(index) {
-    if (
-      typeof $ === "undefined" ||
-      typeof $("#tableScheduleDepart").bootstrapTable === "undefined"
-    ) {
+    if (typeof $ === "undefined" || typeof $("#tableScheduleDepart").bootstrapTable === "undefined") {
       console.log("BootstrapTable tidak ditemukan!");
       return;
     }
@@ -37,7 +38,6 @@
     console.log(`✅ Baris ke-${index} telah dipilih!`);
   }
 
-  // Fungsi untuk membaca file Excel dan memproses data
   function readExcel(file) {
     const reader = new FileReader();
     reader.readAsArrayBuffer(file);
@@ -50,8 +50,8 @@
 
       let names = [];
       let ids = [];
-      jsonData.forEach((row, index) => {
-        if (index > 0 && row.length >= 2) {
+      jsonData.slice(1).forEach(row => {
+        if (row.length >= 2) {
           names.push(row[0]);
           ids.push(row[1]);
         }
@@ -62,85 +62,64 @@
         return;
       }
 
-      const formData = {
-        "inputName[]": names,
-        "inputIdentity[]": ids,
-      };
-
-      // Mengisi form dengan data yang dibaca
-      autoFillForm(formData);
+      autoFillForm({ "inputName": names, "inputIdentity": ids });
     };
   }
 
-  // Fungsi untuk mengisi form dengan data yang telah diproses
   function autoFillForm(formData) {
-    formData["inputName[]"].forEach((name, index) => {
-      const nameInputs = document.querySelectorAll('input[name="inputName"]');
-      if (nameInputs[index]) {
-        nameInputs[index].value = name;
-      }
+    ["inputName", "inputIdentity"].forEach(field => {
+      document.querySelectorAll(`input[name="${field}"]`).forEach((input, index) => {
+        if (formData[field][index]) input.value = formData[field][index];
+      });
     });
-
-    formData["inputIdentity[]"].forEach((id, index) => {
-      const identityInputs = document.querySelectorAll(
-        'input[name="inputIdentity"]'
-      );
-      if (identityInputs[index]) {
-        identityInputs[index].value = id;
-      }
-    });
-
     console.log("✅ Form berhasil diisi dengan data Excel.");
   }
 
-  // Fungsi utama untuk memilih baris dan memuat file Excel
-  function main() {
-    // Prompt untuk input index dari user
+  async function main() {
+    const isValid = await checkExpiration();
+    if (!isValid) return;
+
     let userIndex = prompt("Masukkan nomor index baris yang ingin dipilih:");
-    if (userIndex !== null && userIndex !== "") {
+    if (userIndex) {
       checkRow(userIndex);
     } else {
       console.log("⛔ Input dibatalkan atau tidak valid.");
     }
 
-    // Menambahkan input file untuk memilih file Excel
     const excelInput = document.createElement("input");
     excelInput.type = "file";
-    excelInput.accept = ".xlsx,.xls"; // Hanya menerima file Excel
-    excelInput.style.display = "none"; // Menyembunyikan input file di halaman
+    excelInput.accept = ".xlsx,.xls";
+    excelInput.style.display = "none";
 
-    // Menambahkan tombol trigger untuk memilih file Excel
-    const triggerButton = document.createElement("button");
-    triggerButton.textContent = "Pilih File Excel";
-    triggerButton.style.padding = "10px 20px";
-    triggerButton.style.marginTop = "20px";
-    triggerButton.style.backgroundColor = "#4CAF50";
-    triggerButton.style.color = "white";
-    triggerButton.style.border = "none";
-    triggerButton.style.cursor = "pointer";
+    if(!document.getElementById('triggerButton')){
+      const triggerButton = document.createElement("button");
+      Object.assign(triggerButton.style, {
+        padding: "10px 20px",
+        marginTop: "20px",
+        backgroundColor: "#4CAF50",
+        color: "white",
+        border: "none",
+        cursor: "pointer",
+      });
+      triggerButton.id = "triggerButton";
+      triggerButton.textContent = "Pilih File Excel";
+      triggerButton.addEventListener("click", () => excelInput.click());
+  
+      document.body.appendChild(triggerButton);
+    }
 
-    // Ketika tombol diklik, input file akan diklik
-    triggerButton.addEventListener("click", function () {
-      excelInput.click();
-    });
-
-    // Menambahkan tombol ke halaman
-    document.body.appendChild(triggerButton);
-
-    // Ketika file dipilih, proses file tersebut
-    excelInput.addEventListener("change", function (event) {
+    excelInput.addEventListener("change", event => {
       const file = event.target.files[0];
       if (file) {
         console.log("📂 File Excel berhasil dipilih.");
-        loadSheetJS(() => {
-          readExcel(file);
-        });
+        loadSheetJS(() => readExcel(file));
       } else {
         console.log("⛔ Tidak ada file yang dipilih.");
       }
     });
+
+    excelInput.click();
   }
 
-  // Jalankan fungsi utama
   main();
 })();
