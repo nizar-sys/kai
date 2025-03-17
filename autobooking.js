@@ -41,7 +41,7 @@ function checkAlert() {
     const modalBody = alert.find(".modal-body");
     if (modalBody.length) {
       const alertText = modalBody.text().trim();
-      if (alertText.includes("Unable to make a booking on this schedule, because you are detected making an abnormal booking.")) {
+      if (alertText.includes("Unable to make a booking on this schedule, because you are detected making an abnormal booking.") || alertText.includes("Tidak dapat melakukan booking pada jadwal ini, karena anda terdeteksi melakukan booking dengan tidak normal.")) {
         console.log("⛔ Booking tidak dapat dilakukan.");
         return true;
       }
@@ -56,7 +56,7 @@ function checkMaximum() {
     const modalBody = alert.find(".modal-body");
     if (modalBody.length) {
       const alertText = modalBody.text().trim();
-      if (alertText.includes("Maximum booking per minute reached, you need to wait!")) {
+      if (alertText.includes("Maximum booking per minute reached, you need to wait!") || alertText.includes("Maksimum booking per menit tercapai, anda perlu menunggu!") || alertText.includes("Maksimal booking per menit tercapai, anda perlu menunggu!")) {
         console.log("⛔ Maximum booking limit reached. Waiting...");
         return true;
       }
@@ -81,7 +81,7 @@ function checkAndBook() {
   if (overlay) overlay.style.display = "block";
 
   if (yesButton) {
-    const delay = 1000 + Math.random() * 2000;
+    const delay = 5000;
     console.log(`⏳ Waiting ${Math.round(delay)} ms before booking...`);
     setTimeout(() => {
       if (isBookingActive) {
@@ -90,7 +90,7 @@ function checkAndBook() {
       }
     }, delay);
   } else {
-    const delay = 1000 + Math.random() * 2000;
+    const delay = 5000;
     console.log(`⏳ Waiting ${Math.round(delay)} ms before booking...`);
     setTimeout(() => {
       if (isBookingActive) {
@@ -115,8 +115,6 @@ async function startBookingProcess() {
       if (!isBookingActive) return;
       
       console.log("🔄 Attempting to book...");
-      // captchaVerification();
-      // booking();
       
       if (checkAlert() && updatePhoneNumber()) {
         checkAndBook();
@@ -124,7 +122,7 @@ async function startBookingProcess() {
         checkAndBook();
       }
       
-      const nextTry = 1000 + Math.random() * 2000;
+      const nextTry = 5000;
       console.log(`🔁 Next attempt in ${Math.round(nextTry)} ms...`);
       setTimeout(attemptBooking, nextTry);
     }
